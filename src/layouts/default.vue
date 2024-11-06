@@ -1,6 +1,9 @@
 <template>
 	<div>
-		<Nuxt />
+		<app-nav />
+		<div class="container mx-auto">
+			<Nuxt />
+		</div>
 	</div>
 </template>
 <script>
@@ -10,3 +13,10 @@ export default {
 }
 
 </script>
+<style scoped>
+
+.container {
+	max-width: 752px;
+}
+
+</style>
