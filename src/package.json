@@ -20,6 +20,7 @@
     "vue-template-compiler": "^2.7.10"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6"
+    "@nuxtjs/tailwindcss": "^6",
+    "@nuxtjs/google-fonts": "^3.0.0"
   }
 }

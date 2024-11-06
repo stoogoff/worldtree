@@ -1,5 +1,7 @@
 <template>
-	<h1>HELLO</h1>
+	<div>
+		<dice-roller-input />
+	</div>
 </template>
 <script>
 
