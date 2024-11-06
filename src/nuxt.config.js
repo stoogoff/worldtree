@@ -27,7 +27,9 @@ export default {
 	],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-	plugins: [],
+	plugins: [
+		'~/plugins/api',
+	],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: [
@@ -45,16 +47,16 @@ export default {
 
 	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: [
-		//'@nuxtjs/axios',
+		'@nuxtjs/axios',
 	],
 
 	//serverMiddleware: [],
 
 	// Axios module configuration: https://go.nuxtjs.dev/config-axios
-	/*axios: {
+	axios: {
 		// Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-		baseURL: process.env.API_URL,
-	},*/
+		baseURL: process.env.API_SERVER,
+	},
 
 	googleFonts: {
 		families: {
