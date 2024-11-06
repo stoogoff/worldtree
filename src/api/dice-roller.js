@@ -5,7 +5,7 @@ export default ({ $axios }) => {
 	return {
 		async token() {
 			const result = await $axios.$post('/api/access-token')
-			console.log(result)
+
 			token = result.accessToken
 		},
 
@@ -14,7 +14,14 @@ export default ({ $axios }) => {
 				await this.token()
 			}
 
-			await $axios.$get(`/api/dice-rolls/${ dice }/?acceasToken=${ token }&verbose=true`)
+			// TODO handle token expiry correctly
+			try {
+				return await $axios.$get(`/api/dice-rolls/${ dice }/?accessToken=${ token }&verbose=true`)
+			}
+			catch {
+				token = null
+				return await this.roll(dice)
+			}
 		},
 	}
 }

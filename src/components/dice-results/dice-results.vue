@@ -1,9 +1,6 @@
 <template>
 	<div>
-		<guest-result />
-		<guest-result />
-		<own-result />
-		<own-result />
+		<own-result v-for="roll in $state.rolls()" :roll="roll" />
 	</div>
 </template>
 <script>
