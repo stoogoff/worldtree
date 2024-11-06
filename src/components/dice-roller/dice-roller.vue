@@ -1,5 +1,5 @@
 <template>
-	<div class="dice-roller bg-white relative mx-auto" @focusout="hide" tabindex="0">
+	<div class="relative" @focusout="hide" tabindex="0">
 		<dice-roller-input v-model="value" @open="show" />
 		<transition
 			enter-active-class="transition duration-300 ease-out transform"
@@ -39,10 +39,3 @@ export default Vue.component('DiceRoller', {
 })
 
 </script>
-<style scoped>
-
-.dice-roller {
-	width: 480px;
-}
-
-</style>

@@ -10,3 +10,7 @@ body {
 	padding-top: 68px;
 	font-family: 'Josefin Sans', sans-serif;
 }
+
+.chat-bubble {
+	width: 188px;
+}
