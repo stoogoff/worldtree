@@ -8,6 +8,7 @@ module.exports = {
 				'wt-outline': '#89938E', // main text
 				'wt-outline-dark': '#49454F', // border
 				'wt-primary': '#41DEB4', // highglight
+				'wt-on-surface': '#FBFCFF', // lighter text
 			}
 		}
 	}

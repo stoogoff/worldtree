@@ -3,7 +3,7 @@
 		<div>/r {{ roll.notation }}</div>
 		<div>
 			<span v-for="(output, index) in roll.results">
-				<span v-if="output.type === 'constant'" class="text-white">{{ output.result }}</span>
+				<span v-if="output.type === 'constant'" class="text-wt-on-surface">{{ output.result }}</span>
 				<span v-else>
 					(
 						<span v-for="(dice, index) in output.allRolls">
@@ -15,7 +15,7 @@
 				<span v-if="index < roll.results.length - 1">+ </span>
 			</span>
 		</div>
-		<div>= <span class="text-white">{{ roll.sum }}</span></div>
+		<div>= <span class="text-wt-on-surface">{{ roll.sum }}</span></div>
 	</div>
 </template>
 <script>
@@ -32,7 +32,7 @@ export default Vue.component('DiceResult', {
 
 	methods: {
 		isKept(diceRoll, current) {
-			return diceRoll.keptRolls.includes(current) ? 'text-white': ''
+			return diceRoll.keptRolls.includes(current) ? 'text-wt-on-surface': ''
 		},
 
 		allKept(diceRoll) {

@@ -1,6 +1,6 @@
 <template>
-	<div class="relative" @focus="show" @focusout="hide" tabindex="0">
-		<dice-roller-input @open="show" />
+	<div class="dice-roller relative" tabindex="0">
+		<dice-roller-input @open="show" @focus="keepOpen" />
 		<transition
 			enter-active-class="transition duration-300 ease-out transform"
 			enter-class="translate-y-3 scale-95 opacity-0"
@@ -22,8 +22,23 @@ import Vue from 'vue'
 export default Vue.component('DiceRoller', {
 	data() {
 		return {
+			suppressClose: false,
 			isVisible: false,
 		}
+	},
+
+	mounted() {
+		document.addEventListener('click', () => {
+			if(!!event.target.closest('.dice-roller')) return
+
+			Vue.nextTick(() => {
+				if(!this.suppressClose) {
+					this.isVisible = false
+				}
+
+				this.suppressClose = false
+			})
+		})
 	},
 
 	methods: {
@@ -33,6 +48,10 @@ export default Vue.component('DiceRoller', {
 
 		show() {
 			this.isVisible = true
+		},
+
+		keepOpen() {
+			this.suppressClose = true
 		},
 	},
 })
