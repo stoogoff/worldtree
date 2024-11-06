@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import { diceNotationToJson } from '~/utils/dice'
 import { sortByProperty } from '~/utils/list'
 
 const state = Vue.observable({
@@ -20,37 +21,48 @@ export default () => {
 			return state.dice
 		},
 
-		addDice(type, count) {
+		addDice(type, count, negative = false, kh = null, kl = null) {
 			const existing = state.dice.find(dice => dice.type === type)
 
 			if(existing) {
 				existing.count = count
+
+				if(kh !== null) existing.keepHighest = kh
+				if(kl !== null) existing.keepLowest = kl
 			}
 			else {
-				state.dice.push({ type, count })
+				const dice = { type, count, negative }
+
+				if(kh !== null) dice.keepHighest = kh
+				if(kl !== null) dice.keepLowest = kl
+
+				state.dice.push(dice)
 			}
 		},
 
 		notation() {
-			return state.dice.map(dice => `${ dice.count }${ dice.type === 'constant' ? '' : dice.type }`).join('+')
+			return state.dice.map(dice => {
+				let output = `${ dice.count }${ dice.type === 'constant' ? '' : dice.type }`
+
+				if(dice.keepHighest) output += 'kh'
+				if(dice.keepLowest) output += 'kl'
+
+				return output
+			}).join('+') // TODO handle negative
 		},
 
 		// very basic parseing if dice notation
-		updateNotation(value) {
+		updateNotation(notation) {
 			this.clearDice()
 
-			const inputs = value.split('+')
+			const dice = diceNotationToJson(notation)
 
-			inputs.forEach(item => {
-				// it's a dice
-				if(item.indexOf('d') !== -1) {
-					const [ number, type ] = item.split('d')
-
-					this.addDice('d' + type, parseInt(number))
+			dice.forEach(d => {
+				if(d.constant) {
+					this.addDice('constant', d.constant)
 				}
-				// it's a constant
-				else if(item !== '') {
-					this.addDice('constant', parseInt(item))
+				else {
+					this.addDice('d' + d.sides, d.count, d.negative, d.keepHighest ?? null, d.keepLowest ?? null)
 				}
 			})
 		},
