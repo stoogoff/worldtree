@@ -1,7 +1,7 @@
 <template>
-	<div>
-		<div class="dice-panel mx-auto">
-			<dice-results />
+	<div class="h-full">
+		<div class="dice-panel mx-auto h-full">
+			<dice-results class="h-5/6 mb-10" />
 			<dice-roller />
 		</div>
 	</div>

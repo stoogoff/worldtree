@@ -8,7 +8,7 @@
 			<dice-icon dice="d6" />
 			<dice-icon dice="d4" />
 		</ul>
-		<button-action @click="roll">Roll</button-action>
+		<button-action @click="roll" :disabled="!canRoll">Roll</button-action>
 	</div>
 </template>
 <script>
@@ -16,11 +16,16 @@
 import Vue from 'vue'
 
 export default Vue.component('DiceRollerMenu', {
+	computed: {
+		canRoll() {
+			return this.$state.notation() !== ''
+		},
+	},
+
 	methods: {
 		async roll() {
-			const result = await this.$diceRoll.roll('2d20kh1+1d4+5')
-
-			console.log(result)
+			const notation = this.$state.notation()
+			const result = await this.$diceRoll.roll(notation)
 
 			this.$state.addRoll(result)
 		},

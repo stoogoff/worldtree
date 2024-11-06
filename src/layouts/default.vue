@@ -1,7 +1,7 @@
 <template>
-	<div>
+	<div class="h-full">
 		<app-nav />
-		<div class="container mx-auto">
+		<div class="container mx-auto h-full">
 			<Nuxt />
 		</div>
 	</div>

@@ -1,7 +1,9 @@
 <template>
 	<li class="pl-2.5 py-2 flex gap-2 cursor-pointer" @click="incrementDice">
-		<icon-view :icon="dice" class="text-white" />
-		<span class="mt-0.5">{{ label }}</span>
+		<icon-view :icon="dice" :class="{
+			'text-white': !isSelected,
+			'text-wt-primary': isSelected, }" />
+		<span class="mt-0.5" :class="{ 'text-white': isSelected }">{{ label }}</span>
 	</li>	
 </template>
 <script>
@@ -10,10 +12,6 @@ import Vue from 'vue'
 
 export default Vue.component('DiceIcon', {
 	props: {
-		number: {
-			type: Number,
-			default: 0,
-		},
 		dice: {
 			type: String,
 			required: true,
@@ -21,14 +19,24 @@ export default Vue.component('DiceIcon', {
 	},
 
 	computed: {
-		label() {
-			return (this.number === 0 ? '–' : this.number) + this.dice
+		count() {
+			const current = this.$state.dice().find(({ type }) => type === this.dice)
+
+			return current ? current.count : 0
 		},
+
+		label() {
+			return (this.count === 0 ? '–' : this.count) + this.dice
+		},
+
+		isSelected() {
+			return this.count > 0
+		}
 	},
 
 	methods: {
 		incrementDice() {
-			this.$emit('click', this.dice)
+			this.$state.addDice(this.dice, this.count + 1)
 		},
 	},
 })

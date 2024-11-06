@@ -1,7 +1,7 @@
 
 # WorldTree
 
-To run in a terminal cd into `./src` and run
+To run in a terminal cd into `./src` and rename `example.env` to `.env`, then run the following:
 
 ```
 yarn install
@@ -9,6 +9,10 @@ yarn dev
 ```
 
 In a browser open `http://localhost:3000`
+
+## Things I didn't finish in the time
+
+The components are in place to display guest user rolls but I didn't have time to implement receiving the socket.io broadcast of updates.
 
 ## NOTE
 

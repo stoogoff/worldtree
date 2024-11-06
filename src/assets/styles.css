@@ -7,8 +7,11 @@ html, body {
 	@apply w-full h-full bg-wt-base text-wt-outline;
 }
 body {
-	padding-top: 68px;
 	font-family: 'Lato', sans-serif;
+}
+
+#__nuxt, #__layout {
+	@apply h-full;
 }
 
 .chat-bubble {

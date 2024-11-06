@@ -1,6 +1,6 @@
 <template>
-	<div class="relative" @focusout="hide" tabindex="0">
-		<dice-roller-input v-model="value" @open="show" />
+	<div class="relative" @focus="show" @focusout="hide" tabindex="0">
+		<dice-roller-input @open="show" />
 		<transition
 			enter-active-class="transition duration-300 ease-out transform"
 			enter-class="translate-y-3 scale-95 opacity-0"
@@ -23,7 +23,6 @@ export default Vue.component('DiceRoller', {
 	data() {
 		return {
 			isVisible: false,
-			value: '',
 		}
 	},
 

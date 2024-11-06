@@ -8,7 +8,7 @@
 					(
 						<span v-for="(dice, index) in output.allRolls">
 							<span :class="isKept(output, dice)">{{ dice }}</span>
-							<span v-if="index < output.allRolls.length - 1">| </span>
+							<span v-if="index < output.allRolls.length - 1">{{ allKept ? '+' : '|' }} </span>
 						</span>
 					)
 				</span>
@@ -33,6 +33,10 @@ export default Vue.component('DiceResult', {
 	methods: {
 		isKept(diceRoll, current) {
 			return diceRoll.keptRolls.includes(current) ? 'text-white': ''
+		},
+
+		allKept(diceRoll) {
+			return diceRoll.keptRolls.length === diceRoll.allRolls.length
 		}
 	},
 })
