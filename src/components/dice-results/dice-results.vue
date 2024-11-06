@@ -1,5 +1,5 @@
 <template>
-	<div class="h-full flex flex-col-reverse items-end">
+	<div class="flex flex-col-reverse items-end">
 		<own-result v-for="roll in $state.rolls()" :roll="roll" :key="roll.time.valueOf()" />
 	</div>
 </template>
