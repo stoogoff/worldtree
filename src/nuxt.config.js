@@ -59,7 +59,7 @@ export default {
 	googleFonts: {
 		families: {
 			'Lato': {
-				wght: [400]
+				wght: [400, 500]
 			},
 		},
 		prefetch: true,

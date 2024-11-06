@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<dice-roller-menu />
 		<dice-roller-input />
 	</div>
 </template>
