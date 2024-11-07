@@ -49,6 +49,7 @@ export default {
 	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: [
 		'@nuxtjs/axios',
+		'nuxt-socket-io',
 	],
 
 	//serverMiddleware: [],
@@ -57,6 +58,18 @@ export default {
 	axios: {
 		// Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
 		baseURL: process.env.API_SERVER,
+	},
+
+	io: {
+		sockets: [{
+			name: 'diceRoller',
+			url: process.env.API_SERVER,
+			default: true,
+			vuex: {
+				mutations: ['socket/noop'],
+				actions: ['socket/noop'],
+			},
+		}]
 	},
 
 	googleFonts: {

@@ -37,7 +37,7 @@ export default Vue.component('DiceRollerInput', {
 			const notation = this.$state.notation()
 			const result = await this.$diceRoll.roll(notation)
 
-			this.$state.addRoll(result)
+			this.$state.addOwnRoll(result)
 		},
 	},
 })

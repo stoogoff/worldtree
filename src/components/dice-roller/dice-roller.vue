@@ -10,7 +10,7 @@
 			leave-to-class="translate-y-3 opacity-0"
 		>
 			<div v-show="isVisible" class="absolute pt-2 z-10 left-0 bottom-14">
-				<dice-roller-menu />
+				<dice-roller-menu @close="hide" />
 			</div>
 		</transition>
 	</div>

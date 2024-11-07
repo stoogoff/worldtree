@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import { OWNER_SELF, OWNER_GUEST } from '~/utils/config'
 import { diceNotationToJson } from '~/utils/dice'
 import { sortByProperty } from '~/utils/list'
 
@@ -10,11 +11,36 @@ const state = Vue.observable({
 export default () => {
 	return {
 		rolls() {
-			return [ ...state.rolls ].sort(sortByProperty('time')).reverse()
+			return [ ...state.rolls ].sort(sortByProperty('timesamp')).reverse()
 		},
 
-		addRoll(roll) {
-			state.rolls.push({ ...roll, time: new Date() })
+		addOwnRoll(roll) {
+			// there may be a race condition here with own rolls coming in from
+			// the socket server before the response is received from the API
+			const existing = this.findLooseMatch(roll)
+
+			// if that has happened update the existing roll
+			if(existing) {
+				existing.owner = OWNER_SELF
+			}
+			else {
+				state.rolls.push({ ...roll, timestamp: new Date(), owner: OWNER_SELF })
+			}
+		},
+
+		addGuestRoll(roll) {
+			// check to see if there's an existing roll with the same notation and result
+			// if there is, don't add it as it's the roll we've just sent
+			const existing = this.findLooseMatch(roll)
+
+			if(existing) return
+
+			state.rolls.push({ ...roll, timestamp: new Date(Date.parse(roll.timestamp)), owner: OWNER_GUEST })
+		},
+
+		findLooseMatch(roll) {
+			return state.rolls
+				.find(({ notation, sum }) => notation === roll.notation && sum === roll.sum)
 		},
 
 		dice() {

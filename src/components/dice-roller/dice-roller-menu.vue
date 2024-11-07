@@ -24,10 +24,12 @@ export default Vue.component('DiceRollerMenu', {
 
 	methods: {
 		async roll() {
+			this.$emit('close')
+
 			const notation = this.$state.notation()
 			const result = await this.$diceRoll.roll(notation)
 
-			this.$state.addRoll(result)
+			this.$state.addOwnRoll(result)
 		},
 	},
 })
